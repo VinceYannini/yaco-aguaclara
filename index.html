@@ -58,8 +58,7 @@
         <div class="emergency-inner">
             <div class="emergency-text" style="grid-column: 1 / -1; text-align: center;">
                 <h2>🏊‍♂️ ¿Tienes una alberca en casa?</h2>
-                <p>Aprovecha nuestra promoción especial:<br><strong>En la compra de tu agua, te INFLAMOS GRATIS tu
-                        alberca.</strong></p>
+                <p><strong>En la compra del agua para llenarla, te la INFLAMOS SIN COSTO.</strong></p>
                 <a href="https://wa.me/5219622151185?text=AGUACLARA%3A%20Hola!%20Me%20interesa%20el%20llenado%20de%20alberca"
                     class="btn-emergency-big" target="_blank">💬 Cotizar Llenado</a>
             </div>
@@ -123,45 +122,37 @@
         </div>
     </section>
 
-    <!-- QUOTE FORM -->
+    <!-- CLEANING SERVICE / VIDEO SECTION (Replaces Quote Form) -->
     <section class="quote-section" id="cotizar">
         <div class="container">
-            <div class="quote-grid">
+            <div class="quote-grid" style="align-items: center;">
                 <div class="quote-info">
-                    <h2 class="section-title">Haz tu<br /><span>Pedido Ahora</span></h2>
-                    <p>Llena el formulario y mandaremos tu pedido por WhatsApp para confirmar la entrega lo antes
-                        posible.</p>
-                    <ul class="quote-benefits">
-                        <li>✅ Agua 100% limpia y segura</li>
-                        <li>✅ Entrega rápida en Tapachula</li>
-                        <li>✅ Atendemos llamadas y WhatsApp</li>
+                    <h2 class="section-title">Servicio Especializado de<br /><span>Lavado de Cisternas y Tinacos</span>
+                    </h2>
+                    <p style="font-size: 1.1rem; margin-top: 1rem;">Mantén el agua de tu familia 100% limpia y segura.
+                        Nuestro equipo profesional realiza la limpieza profunda de tus contenedores de agua.</p>
+                    <ul class="quote-benefits" style="margin-top: 2rem;">
+                        <li>✨ Eliminación de sarro, lodo y bacterias</li>
+                        <li>✨ Limpieza profunda a presión</li>
+                        <li>✨ Desinfección completa del interior</li>
+                        <li>✨ Servicio rápido y garantizado</li>
                     </ul>
+                    <a href="https://wa.me/5219622151185?text=AGUACLARA%3A%20Hola!%20Me%20interesa%20cotizar%20el%20lavado%20de%20cisterna/tinaco."
+                        class="btn-primary" style="margin-top: 2rem; background: var(--green);">💬 Agendar Limpieza por
+                        WhatsApp</a>
                 </div>
-                <form class="quote-form" id="quoteForm">
-                    <div class="form-group">
-                        <label for="fname">Tu Nombre</label>
-                        <input type="text" id="fname" placeholder="Ej: Juan Pérez" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="fphone">Tu Teléfono</label>
-                        <input type="tel" id="fphone" placeholder="Ej: 962 123 4567" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="fservice">¿Qué cantidad necesitas?</label>
-                        <select id="fservice" required>
-                            <option value="">Selecciona uno...</option>
-                            <option value="Pipa (5000 LTS)">🚚 Pipa (5000 LTS)</option>
-                            <option value="Tinaco (1100 LTS)">🛢️ Tinaco (1100 LTS)</option>
-                            <option value="Llenado de Alberca">🏊‍♂️ Llenado de Alberca</option>
-                            <option value="Otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="fdesc">Dirección de Entrega / Referencias</label>
-                        <textarea id="fdesc" rows="3" placeholder="Ej: Calle 4 Sur #12, fachada blanca..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Enviar Pedido por WhatsApp 💬</button>
-                </form>
+
+                <div class="video-container"
+                    style="background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 1rem; text-align: center;">
+                    <p style="color: rgba(255,255,255,.8); font-weight: 600; margin-bottom: 1rem;">Mira cómo trabajamos
+                        👇</p>
+                    <!-- TBD: The client will provide the video file. For now, a placeholder video tag is used. -->
+                    <video controls style="width: 100%; border-radius: 12px; background: #000;"
+                        poster="img/cleaning-poster.jpg">
+                        <source src="img/cleaning-video.mp4" type="video/mp4">
+                        Tu navegador no soporta el formato de video.
+                    </video>
+                </div>
             </div>
         </div>
     </section>
