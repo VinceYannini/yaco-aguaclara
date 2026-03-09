@@ -9,44 +9,44 @@ const WA_PHONE = '5219622151185';
 const LEAD_KEY = 'aguaclara_leads';
 
 function getLeads() {
-    try { return JSON.parse(localStorage.getItem(LEAD_KEY)) || []; }
-    catch { return []; }
+  try { return JSON.parse(localStorage.getItem(LEAD_KEY)) || []; }
+  catch { return []; }
 }
 
 function saveLead(type, detail) {
-    const leads = getLeads();
-    leads.push({
-        type,
-        detail,
-        date: new Date().toISOString(),
-        id: leads.length + 1
-    });
-    localStorage.setItem(LEAD_KEY, JSON.stringify(leads));
+  const leads = getLeads();
+  leads.push({
+    type,
+    detail,
+    date: new Date().toISOString(),
+    id: leads.length + 1
+  });
+  localStorage.setItem(LEAD_KEY, JSON.stringify(leads));
 }
 
 // Track all WA link clicks (except form, which is tracked separately)
 document.addEventListener('click', e => {
-    const link = e.target.closest('a[href*="wa.me"]');
-    if (link && !link.closest('#quoteForm')) {
-        const url = new URL(link.href);
-        const text = decodeURIComponent(url.searchParams.get('text') || '');
-        const type = '💬 WhatsApp Click';
-        saveLead(type, text.substring(0, 80));
-    }
+  const link = e.target.closest('a[href*="wa.me"]');
+  if (link && !link.closest('#quoteForm')) {
+    const url = new URL(link.href);
+    const text = decodeURIComponent(url.searchParams.get('text') || '');
+    const type = '💬 WhatsApp Click';
+    saveLead(type, text.substring(0, 80));
+  }
 });
 
 // Track phone call clicks
 document.addEventListener('click', e => {
-    const link = e.target.closest('a[href^="tel:"]');
-    if (link) saveLead('📞 Llamada', link.href);
+  const link = e.target.closest('a[href^="tel:"]');
+  if (link) saveLead('📞 Llamada', link.href);
 });
 
 /* ---- Admin Stats Panel (access via ?stats in URL) ---- */
 if (window.location.search.includes('stats')) {
-    const leads = getLeads();
-    const panel = document.createElement('div');
-    panel.id = 'adminPanel';
-    panel.innerHTML = `
+  const leads = getLeads();
+  const panel = document.createElement('div');
+  panel.id = 'adminPanel';
+  panel.innerHTML = `
     <style>
       #adminPanel {
         position: fixed; inset: 0; z-index: 9999;
@@ -101,13 +101,13 @@ if (window.location.search.includes('stats')) {
       </tbody>
     </table>
   `;
-    document.body.appendChild(panel);
+  document.body.appendChild(panel);
 }
 
 /* ---- Navbar scroll ---- */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  navbar.classList.toggle('scrolled', window.scrollY > 30);
 });
 
 /* ---- Mobile nav toggle ---- */
@@ -115,69 +115,69 @@ const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
 navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+  navLinks.classList.toggle('open');
+  navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
 });
 navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        navToggle.textContent = '☰';
-    });
+  a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.textContent = '☰';
+  });
 });
 
 /* ---- Form → WhatsApp ---- */
 const form = document.getElementById('quoteForm');
 
 form.addEventListener('submit', e => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = document.getElementById('fname').value.trim();
-    const phone = document.getElementById('fphone').value.trim();
-    const service = document.getElementById('fservice').value;
-    const desc = document.getElementById('fdesc').value.trim();
+  const name = document.getElementById('fname').value.trim();
+  const phone = document.getElementById('fphone').value.trim();
+  const service = document.getElementById('fservice').value;
+  const desc = document.getElementById('fdesc').value.trim();
 
-    if (!name || !phone || !service) {
-        alert('Por favor llena los campos obligatorios: nombre, teléfono y servicio.');
-        return;
-    }
+  if (!name || !phone || !service) {
+    alert('Por favor llena los campos obligatorios: nombre, teléfono y servicio.');
+    return;
+  }
 
-    const prefix = '📋 Nuevo Pedido Agua Clara';
+  const prefix = '📋 Nuevo Pedido Agua Clara';
 
-    const msg = [
-        `AGUACLARA: ${prefix}`,
-        ``,
-        `👤 Nombre: ${name}`,
-        `📞 Teléfono: ${phone}`,
-        `💧 Servicio: ${service}`,
-        desc ? `📍 Dirección/Referencias: ${desc}` : '',
-    ].filter(Boolean).join('\n');
+  const msg = [
+    `AGUACLARA: ${prefix}`,
+    ``,
+    `👤 Nombre: ${name}`,
+    `📞 Teléfono: ${phone}`,
+    `🛠 Servicio: ${service}`,
+    desc ? `📍 Dirección/Referencias: ${desc}` : '',
+  ].filter(Boolean).join('\n');
 
-    // Track as form lead
-    saveLead('📋 Formulario', `${name} — ${service}`);
+  // Track as form lead
+  saveLead('📋 Formulario', `${name} — ${service}`);
 
-    const encoded = encodeURIComponent(msg);
-    const waUrl = `https://wa.me/${WA_PHONE}?text=${encoded}`;
-    window.open(waUrl, '_blank');
+  const encoded = encodeURIComponent(msg);
+  const waUrl = `https://wa.me/${WA_PHONE}?text=${encoded}`;
+  window.open(waUrl, '_blank');
 });
 
 /* ---- Scroll-reveal ---- */
 const observer = new IntersectionObserver(
-    entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }
-        });
-    },
-    { threshold: 0.1 }
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  },
+  { threshold: 0.1 }
 );
 
 document.querySelectorAll('.service-card, .step-card, .testimonial-card, .tag').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity .5s ease, transform .5s ease';
+  observer.observe(el);
 });
 
 /* ---- WA Float: hide at footer ---- */
@@ -185,9 +185,9 @@ const waFloat = document.getElementById('waFloat');
 const footer = document.querySelector('.footer');
 
 const footerObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-        waFloat.style.opacity = e.isIntersecting ? '0' : '1';
-        waFloat.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
-    });
+  entries.forEach(e => {
+    waFloat.style.opacity = e.isIntersecting ? '0' : '1';
+    waFloat.style.pointerEvents = e.isIntersecting ? 'none' : 'auto';
+  });
 });
 footerObs.observe(footer);
